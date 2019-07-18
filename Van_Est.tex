@@ -1,0 +1,353 @@
+\pdfoutput=1
+%The other issue is that some packages, such as microtype, produce different output under pdflatex. By default the arXiv goes from dvi to ps to pdf, so if you need pdflatex you have to set the \pdfoutput flag in the TeX file.
+\newif\ifpersonal
+\personaltrue % comment to remove personal notes
+
+\documentclass[10pt,a4paper]{amsart}
+\usepackage{fullpage}
+%\linespread{1.1}
+%\usepackage{amsmath, amscd, amssymb, amsthm, latexsym, url, color, todonotes} %pdflscape}
+%\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage[left=1.0in, right=1.0in, top=1in, bottom=1.3in, includefoot, headheight=13.6pt]{geometry}
+\usepackage[colorlinks=true,hyperindex,citecolor=blue,linkcolor=black]{hyperref}
+\input{xy}
+%\cXyoption{all}
+%\usepackage{natbib}
+\usepackage{cite}
+\usepackage{tikz-cd}
+%\usepackage{stix}
+\setlength{\marginparwidth}{1in}
+\usepackage[capitalize]{cleveref}
+%\usepackage[utf8]{inputenc}
+\usepackage{eucal,times,amsmath,amsthm,amssymb,mathrsfs,stmaryrd,color,enumerate,accents}
+\usepackage{tensor}
+
+\usepackage{textcomp}
+%\RequirePackage[l2tabu,orthodox]{nag} %detect whether obsolete packages are used
+%\documentclass[10pt,a4paper,reqno]{amsart} %reqno places equation numbers on the right
+%\linespread{1.1}
+\usepackage{mathtools,bm,eucal} % math related
+%\usepackage{microtype,fixltx2e,lmodern} % latex technical issues
+%\usepackage[utf8]{inputenc} % input encoding
+\usepackage[T1]{fontenc} % font encoding
+\usepackage{enumerate,comment,braket,xspace,csquotes} % utilities
+%\usepackage[all,cmtip]{xy} % because the tikzcd options [shift left], [shift right] do not work on arXiv, we switched some diagrams to xymatrix
+%\usepackage[centering,vscale=0.7,hscale=0.8]{geometry}
+%\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{subsection}
+\newcommand{\heart}{\ensuremath\heartsuit}
+%BEGIN MY COMMANDS
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{thm-intro}{Theorem}
+
+\newtheorem{ap-theorem}{Theorem}
+\newtheorem{ap-corollary}{Corollary}
+\newtheorem{ap-lemma}{Lemma}
+\newtheorem{ap-proposition}{Proposition}
+\newtheorem{ap-definition}{Definition}
+
+
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{warning}[theorem]{Warning}
+\newtheorem{convention}[theorem]{Convention}
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\labelitemi}{-}
+
+\newcommand{\cXysquare}[8]{
+\[\cXymatrix{
+#1 \ar@{#5}[r] \ar@{#6}[d] & #2 \ar@{#7}[d]\\
+#3 \ar@{#8}[r] & #4
+}\]
+}
+
+\DeclareMathOperator*{\indlimf}{``\colim''}
+\DeclareMathOperator*{\projlimf}{``\lim''}
+\DeclareMathOperator*{\holim}{\operatorname*{holim}}
+\def\lim{\mathrm{lim}}
+\DeclareMathOperator*{\hocolim}{\operatorname*{hocolim}}
+\DeclareRobustCommand{\SkipTocEntry}[5]{}
+
+
+%\newcommand{\abs}[1]{\vert#1\vert}
+
+\input{newcommands}
+
+\author{Jorge ANT\'ONIO}
+\address{Jorge Ant\'onio,  Institut de Math\'ematiques de Toulouse, 118 Rue de Narbonne  31400 Toulouse}
+\email{\texttt{jorge\_tiago.ferrera\_antonio@math.univ-toulouse.fr}}
+
+\author{Joost NUITEN}
+\address{Joost Nuiten, IMAG Universit\'e de Montpellier, Place Eug\`{e}ne Bataillon
+34090 Montpellier}
+
+
+\date{}
+
+\title{A Van Est theorem in mixed characteristic} 
+
+
+
+\begin{document}
+
+
+\maketitle
+
+\personal{PERSONAL COMMENTS ARE SHOWN!!!}
+
+\tableofcontents
+
+\section{Geometric context}
+\personal{Does one really needs to work locally for the fpqc topology or can we refine the topology further by dropping the quasi-compactness assumption?}
+\subsection{Assumptions}
+First of all we will define the context in which we are going to work through.  Let us denote $\adCAlg$ the \infcat of adic $\bZp$-simplicial algebras, introduced in \cite{antonio2018p}. We consider the \infcat $\adSt(\adCAlg, \tau_{\et}, \rmP_{\sm})$ of \emph{derived $\bZp$-adic geometric stacks}.
+Suppose we are given a diagram of the form
+    \[
+    \begin{tikzcd}
+        M \ar{r}{p} \ar{d}{q} & X \\
+        Y 
+    \end{tikzcd}
+    \]
+where $M \in \dfSch$ is a smooth $\bZp$-adic scheme and $X, \ Y \in \adSt(\adCAlg, \tau_{\et}, \rmP_{\sm})$. Throughout the text, $p$ denotes a smooth surjective morphism and $q$ a smooth morphism of derived $\bZp$-adic geometric stacks. We assume further that $Y$ satisfies \emph{fpqc descent}.
+\personal{The need to assume that $Y$ satisfies fpqc descent boils down to the fact that the \'etale topology is not sufficient for many of our purposes. Namely, in order to compute the correct mapping spaces of derived $\bZp$-adic geometric stacks one needs to pass to perfectoid coverings, in a similar vein as in BMS1. 
+More precisely, given a Noetherian regular algebra $\bZp$-algebra $A$, by a theorem of Bhatt, Iyegar and Ma one knows that there exists a faithfully flat morphism
+$A \to A_\infty$, where $A_\infty$ is integral perfectoid. Furthermore, by a celebrated result of Abhyankar one can suppose further that $A_\infty$ admits all $p$-th power roots of unity, thus living over the perfectoid covering $\cycbZp$ of $\bZp$. However, it seems that, in general, the morphism $A \to A_\infty$ is not \'etale or even weak \'etale in the sense of \cite{bhatt2013pro}.
+Therefore, in order to be able to reduce our local computations to computations involving the perfectoid nature of suitable algebras, one needs to assume $Y$ to satisfy fpqc descent.
+This is indeed the case when $Y = \Perf, \ \mathrm{QCoh}^\heartsuit, \ \mathrm{QCoh}, \mathrm{Bun}_G$, where $G$ denotes a reductive group, $X$ a formal scheme, $\mathrm{B} G$, for $G$ a formal group scheme or a $p$-divisible group, $\mathcal{M}_{\mathrm{FM}}$ the moduli space of $p$-divisible groups, etc.}
+
+Our goal is to prove a mixed characteristic analogue of a theorem of Van Est, in the context of (derived) differential geometry, proved in great generality by J. Nuiten using the Koszul duality for Lie algebroids, see \cite{nuiten2017koszul}. 
+\todo{Recall the statement}
+\todo{Check that the geometricity of the stack $Y$ is really need or we can relax a bit the assumptions on $Y$, in order for the result to be compatible with $\cM_{\FormalModels}$, for example.}
+\section{The existence of a local section}
+
+We want to prove a connectivity statement for the canonical morphism of mapping spaces
+    \[  
+        \Map_{M/ }\big( X, Y \big) \to \Map_{\adSt} \big( X^\wedge_M , Y^\wedge_M \big) .
+    \]
+
+Suppose then that we are given a morphism of sheaves
+    \[
+        X^\wedge_M \to Y  .
+    \]
+Assume further that we have a smooth covering $\pi \colon P \to Y $, in the \infcat $\adSt(\adCAlg, \tau_{\text{\'et}}, \rmP_{\sm})$ and form the pullback square
+    \[
+    \begin{tikzcd}
+            P' \ar{r} \ar{d} & P \ar{d} \\
+            X^\wedge_M \ar{r}  & Y.
+    \end{tikzcd}
+    \]
+In particular, the natural morphism $P' \to X^\wedge_M$ is a smooth covering. Moreover, we have a natural inclusion morphism   
+    \[
+        M \to X^\wedge_M.
+    \]
+Our goal is to lift the morphism $X^\wedge_M \to Y$ to a morphism $M \to P$ which induces a well defined morphism at the level of \v{C}ech nerves 
+    \[
+        \vC(M_\bullet / X) \to \vC(P_\bullet / Y). 
+    \]
+In order to do so, we will construct a section of the smooth morphism 
+    \[
+        P' \to X^\wedge_M,  
+    \]
+which induces, via composition, a morphism $M \to P$. The construction of the section is a local construction and it is precisely in this situation that we will use the setting of integral perfectoid $\bZp$-algebras.
+
+\begin{lemma}
+If such a section to $X^\wedge_M \to P'$ exists then it induces such a morphism at the level of \v{C}ech nerves
+    \[
+        \vC(M_\bullet / X) \to \vC(P_\bullet / Y)
+    \]
+\end{lemma}
+
+\subsection{First reduction step} Let $r \colon U \to X$ denote a morphism in $\adSt( \adCAlg, \tau_{\'et}, \rmP_\sm)$ such that
+    \[
+        U \coloneqq \Spf A  
+    \]
+is a derived affined $\bZp$-adic scheme. 
+
+\personal{Do we have to impose assumptions on the morphism $U \to X$, such as being Zariski open, \'etale?}
+
+\begin{proposition} \label{stat_1} Up to shrienking $U$ we can suppose that the pullback of the smooth covering map $p \colon M \to X$ along $r$ can be realized as a composition of the form
+    \[
+    \begin{tikzcd}
+        U \times \Spf R \ar{r}{g} & U \times \bT^n \ar{r}{\pr} & U ,
+    \end{tikzcd}
+    \]
+where $g$ is an \'etale morphism. Moreover, $g$ itself factors as a composite
+    \[
+    \begin{tikzcd}
+            U \times \Spf R \ar{r}{g'} & U \times W \ar{r}{s} & U \times \bT^n,
+    \end{tikzcd}  
+    \]
+where $g'$ corresponds to a rational domain inclusion and $s$ is a finite \'etale map.
+\end{proposition}
+
+\begin{remark}
+    The second part of the above statement might not be necessary for our purposes. However I am not sure yet.
+\end{remark}
+
+\begin{notation}
+    We will denote by $\cycbZp$ the integral perfectoid $\bZp$-algebra obtained from $\bZp$ by adding all $p$-th roots of unity to $\bZp$ and performing a $p$-adic completion.
+\end{notation}
+Assuming \cref{stat_1} holds, one can further proceed to show that:
+
+
+\begin{lemma}
+    There exists a commutative diagram, \personal{possibly cartesian and fpqc coverings?}, of the form
+    \begin{equation}
+    \begin{tikzcd} \label{diag_chain_pulls}
+            U^\cyc \times_{\Spf \cycbZp} \Spf R_\infty \ar{r} \ar{d} & U \times \Spf R \ar{d} \\  
+            U^\cyc \times_{\Spf \cycbZp} \bT^n(p^\infty) \ar{r} \ar{rd} & U \times \bT^n \ar{d} \\
+             & U
+    \end{tikzcd}
+    \end{equation}
+    in the \infcat $\Shv_{\fpqc}(\adCAlg)$. Here 
+        \[
+            U^\cyc \coloneqq U \times \Spf \cycbZp
+        \]
+    and 
+         \[
+            \bT(p^\infty) \to \bT 
+        \]
+        denotes the perfectoid cover of the torus $\bT$, given by adding $p$-th roots of unity to $\bZp$ and $p$-th roots of the (free invertible) variables on $\bT$.
+\end{lemma}
+
+\begin{lemma}
+    The \emph{fpqc}-covering $\bT(p^\infty) \to \bT$ is a $\Gamma \coloneqq \prod_n \bZp(1)$-torsor, for the \emph{fpqc}-topology, which is compatible with the \emph{fpqc}-$\bZp(1)$-torsor
+        \[
+                \Spf \cycbZp \to \Spf \bZp.  
+        \]
+\end{lemma}
+
+
+\begin{proposition}
+    The pullback square of derived $\bZp$-adic geometric stacks
+        \[
+        \begin{tikzcd} 
+            U \times \Spf R \ar{r} \ar{d} & M \ar{d}{p} \\
+            U \ar{r} & X
+        \end{tikzcd}
+        \]
+    induces a canonical morphism $U \times ( \Spf R)_{\dR} \to X^\wedge_M$. Moreover, if the morphism $U \to X$ is surjective or a covering (namely, an effective epimorphism of sheaves) then
+    so it is the canonical morphism
+        \[
+                U \times (\Spf R)_{\dR} \to X^\wedge_M.  
+        \]
+\end{proposition}
+
+\subsection{Further reductions} Our initial situation can be thus translated as follows: consider the chain of pullback diagrams
+    \[
+    \begin{tikzcd}
+        \tP'' \ar{r} \ar{d} & \tP' \ar{r} \ar{d} & \tP \ar{r} \ar{d} & P \ar{d} \\
+        U \times \Spf R \ar{r} \ar{d} & M \ar{r} \ar{d} & X^\wedge_M \ar{r} & Y \\
+        U \ar{r} & X & &
+    \end{tikzcd}.
+    \]
+The induced morphism $U \times \Spf R \to X^\wedge_M$ factors as
+    \begin{equation} \label{diag1}
+            U \times \Spf R \to U \times (\Spf R)_{\dR} \to X^\wedge_M . 
+    \end{equation}
+Consider the following \emph{pullback} diagram in the \infcat, $\Shv_{\fpqc}(\adCAlg)$, \personal{is it really a pullback diagram?},
+    \[
+    \begin{tikzcd}
+            \Spf R_\infty \ar{r} \ar{d}{\theta} & \Spf R \ar{d} \\ 
+            \Spf \AdR (R_\infty) \ar{r} & (\Spf R)_\dR,
+    \end{tikzcd}
+    \]
+where  $\AdR(R_\infty)$ denotes the completion with respect to the kernel (structural) ring homomorphism 
+    \[
+        \theta \colon \Ainf (R_\infty) \to R_\infty, 
+    \]
+which, by the perfectoid nature of $R_\infty$, is generated by a single elemet $\varepsilon \in \Ainf(R_\infty$.
+
+\begin{lemma}
+        Let $R_\infty \in \adCAlg$ denote a perfectoid $\bZp$-algebra and consider the (structural) morphism
+            \[
+                \theta \colon \Ainf(R_\infty) \to R_\infty  .
+            \]
+        Then $\theta$ exhibits $\Spf \AdR(R_\infty)$ as the \emph{de Rham stack} associated to $\Spf R_\infty$, $(\Spf R_\infty)_\dR$. Furthermore, if we are given a faithfully flat morphism $R \to R_\infty$, where $R$ is a regular Noetherian $\bZp$-adic algebra, then
+        $\Spf \AdR(R_\infty) \to (\Spf R)_{\dR}$ is a fpqc morphism.
+\end{lemma}
+
+Restricting further along the faithfully flat morphisms $\Spf R_\infty \to \Spf R$ and $\Spf \AdR(R_\infty) \to (\Spf R)_{\dR}$ one obtains thus a pullback square of the form
+    \begin{equation} \label{diag_local}
+    \begin{tikzcd}
+        P_\infty \ar{r} \ar{d} & \tP_\infty \ar{d} \\
+        U^\cyc \times_{\Spf \cycbZp} \Spf R_\infty \ar{r} & U^\cyc \times_{\Spf \cycbZp} \Spf \AdR(R_\infty)
+    \end{tikzcd}    
+    \end{equation}
+in the \infcat $\Shv_{\fpqc}(\adCAlg)$.
+
+\begin{remark}
+Notice that, up to shrienking $U$ mapping into $X$, one can assume that the smooth map $\tP'' \to U \times \Spf R$, displayed in diagram \eqref{diag_chain_pulls}, is actually of the form
+    \[
+            U \times \Spf R \times \Spf S \to U \times \Spf R ,  
+    \]
+where $\Spf S $ admits a suitable \'etale morphism to a torus $\Spf S \to \bT^m$. 
+\end{remark}
+
+For this reason, building upon what we have discussed so far, one can actually suppose that the diagram \eqref{diag_local} is of the form
+    \[
+    \begin{tikzcd}
+        U^\cyc \times_{\Spf \cycbZp} \Spf S_\infty \times_{\Spf \bZp^\cyc} \Spf R_\infty \ar{r} \ar{d} & \tP \ar{d} \\
+        U^\cyc \times_{\Spf \cycbZp} \Spf R_\infty \ar{r} & U^\cyc \times_{\Spf \bZp^\cyc} \Spf \AdR(R_\infty),
+    \end{tikzcd}
+    \]
+where $S_\infty$ is a perfectoid $\bZp$-algebra which admits a faithfully flat morphism of the form $S \to S_\infty$. Moreover, as before, we can assume that $S_\infty$ admits all $p$-th roots of unity and $p$-th roots of the (invertible free) variable overs $\bT^m$ (\todo{make this assertion more precise}). In particular, we deduce that $S_\infty$ is naturally a $\cycbZp$-algebra.
+
+\subsection{Existence and descent properties of local sections} In order to construct the desired section one would be reduced to show the following:
+
+\begin{notation}
+    We denote by $\cotimes$ the $p$-complete tensor product in the \infcat $\adCAlg$.
+\end{notation} 
+
+\begin{proposition}
+    The \emph{adic cotangent complex} 
+        \[
+                \adL_{S_\infty \cotimes_p R_\infty / R_\infty} \simeq 0.  
+        \]
+    In particular, there are no obstructions to find a deformation of the morphism
+        \[
+                U^\cyc \times_{\Spf \cycbZp} \Spf S_\infty \times_{\Spf \cycbZp} \Spf R_\infty \to U^\cyc \times_{\Spf \cycbZp} \Spf R_\infty.  
+        \]
+\end{proposition}
+
+\begin{corollary}
+    The deformation morphism $\widetilde{q} \colon \tP \to U^\cyc \times_{\cycbZp} \Spf \AdR(R_\infty)$ of the projection
+        \[
+                U^\cyc \times_{\Spf \cycbZp} \Spf S_\infty \times_{\Spf \cycbZp} \Spf R_\infty \to U^\cyc \times_{\cycbZp} \Spf \AdR(R_\infty)  
+        \]
+    corresponds to the trivial deformation. In particular, it admits a section.
+\end{corollary}
+
+\begin{theorem}
+    There exists a choice of a section $s \colon \Spf \AdR(R_\infty) \to \tP$ of $\widetilde{q}$ which is $\Gamma$-equivariant. In particular, it descends to a section of the morphism
+        \[
+            \widetilde{q} \colon \tP \to U \times (\Spf R)_{\dR}  
+        \]
+\end{theorem}
+
+\personal{In order for the section $s$ constructed above to descend, does one need to show that 
+    \[
+        \widetilde{q} \colon \tP \to U^\cyc \times_{\cycbZp} \Spf \AdR(R_\infty)
+    \]
+    $\widetilde{q} \colon \tP \to U^\cyc \times_{\cycbZp} \Spf \AdR(R_\infty)$
+is also a $\Gamma$-torsor?}
+
+
+\bibliographystyle{plain}
+\bibliography{Van_Est}
+\end{document}
