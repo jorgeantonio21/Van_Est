@@ -115,6 +115,351 @@
 \section{Geometric context}
 \personal{Does one really needs to work locally for the fpqc topology or can we refine the topology further by dropping the quasi-compactness assumption?}
 
+\subsection{$\bZp$-adic geometric stacks}
+
+Let $\adCAlg$ denote the \infcat of simplicial $\bZp$-adic algebras. 
+
+\begin{definition}
+    Let $f \colon A \to B$ be a morphism in the \infcat $\adCAlg$. The morphism $f$ is said to be \emph{\'etale} (resp., \emph{smooth}) if it is \emph{almost topologically of finite presentation} and the relative cotangent complex
+        \[
+                \adL_{B/A} \in \Mod_B.   
+        \]
+    vanishes (resp. it is equivalent to a free $B$-module of finite rank concentrated in degree $0$).
+\end{definition}
+
+\begin{definition}
+    Let $\rmP_\sm$ denote the class of smooth morphisms in the \infcat $\adCAlg$. The triplet $(\adCAlg, \tau_\et, \rmP_\sm)$ forms a \emph{geometric context}, which we refer to as the \emph{derived $\bZp$-adic geometric context}.
+\end{definition}
+
+\begin{definition}
+    The \infcat of \emph{derived $\bZp$-adic geometric stacks} is defined as the \infcat of geometric stacks
+        \[
+             \adSt \coloneqq \dSt( \adCAlg, \tau_\et, \rmP),
+        \]
+    with respect to the derived $\bZp$-adic geometric context.
+\end{definition}
+
+\begin{remark}
+    Let $
+            L_p^\wedge \colon \CAlg_{\bZp} \to \adCAlg
+        $
+    denote the \emph{$p$-completion functor}, introduced in \cite[\S 8]{lurie2016spectral}. Given $A \in \adCAlg$, we define $A_n \in \adCAlg$ as the pushout
+        \[
+        \begin{tikzcd}
+            A[t] \ar{r}{t \mapsto p^n} \ar{d}{t \mapsto 0} & A \ar{d} \\
+            A \ar{r} & A_n
+        \end{tikzcd}
+        \]    
+    computed in \infcat $\CAlg_{\bZp}$. Notice that $A_n$ is naturally an object of the \infcat $\adCAlg$ via the canonical inclusion $\adCAlg \subseteq \CAlg_{\bZp}$.
+    Thanks to \cite[Lemma 8.1.2.3]{lurie2016spectral}, one has a natural equivalence
+        \[
+            (A)^\wedge_p \simeq \lim_{\geq 1} A_n,  
+        \]
+    in the \infcat $\adCAlg$, where $(A)^\wedge_p$ denotes the $p$-completion of $A$.
+    Given a functor $X \colon \CAlg_{\bZp} \to \cS$, we define its \emph{$p$-completion} as the functor
+        \[
+                X^\wedge_p \colon \adCAlg \mapsto \cS  
+        \]
+    given by the formula
+        \begin{equation} \label{p-comp_stacks]}
+                A \in \adCAlg \mapsto \lim_{n \geq 1} X(A_n) \in \cS.  
+        \end{equation}
+    From the above formula \eqref{p-comp_stacks}, it is clear that if $X$ satisfies \'etale hyper-descent then so it does $X^\wedge_p$ satisfies descent with respect to $\tau_\et$-hypercoverings in $(\adCAlg, \tau_\et)$.
+    Suppose now that $X \in \dSt( \CAlg_{\bZp}, \tau_\et, \rmP_\sm)$ denotes an (algebraic) derived $\bZp$-geometric stack. Then the $p$-completion of the corresponding functor of points,
+    which we shall simply denote by $X^\wedge_p$, is naturally a derived $\bZp$-adic geometric stack, i.e., $X^\wedge_p \in \adSt$.
+    To see this, let
+        \[
+                \pi \colon P \to X  ,
+        \]
+    be a smooth covering of $X$ where $P \in \dSch$ is a derived $\bZp$-scheme. Then
+        \[
+                (
+                \pi
+                )^\wedge_p \colon P^\wedge_p \to X^\wedge_p  
+        \]
+    is still a smooth covering of $X^\wedge_p$ by the derived $\bZp$-adic scheme, $P^\wedge_p$.
+
+    More generally, given a compatible \emph{ind-system}, $\{X_n \}_{n \geq 1}$, where for each $n \geq 1$, $X_n$ denotes a derived $\bZ/p^n$-geometric stack. Then the induced functor
+        \[
+            \colim_{n \geq 1} X_n \colon \adCAlg \to \cS  
+        \]
+    is naturally a derived $\bZp$-adic geometric stack.
+\end{remark}
+
+\begin{example}
+    Let $X \in \dSch$ denote a derived $\bZp$-scheme, then its $p$-completion, $X^\wedge_p$ is naturally an object in the \infcat $\adSt$. Of interest to us will be the derived moduli stack parametrizing perfect complexes, $\Perf$ and classifying spaces of formal groups or $p$-divisible groups.
+    Given any formal reductive group $G$, $\mathrm{Bun}_G$ also lives naturally in the \infcat $\adSt$.
+\end{example}
+
+\begin{remark}
+    Let $X \in \St(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$. Thanks to Artin-Lurie representability theorem, \cite[?]{lurie2012dag}, the functor of points associated to $X$ is nilcomplete, infinitesimally cartesian
+    and it admits a global algebraic cotangent complex, which is an almost perfect complext on $X$. From the definitions, it is clear that $X^\wedge_p$ also possedes these properties, namely it is nilcomplete, infinitesimally cartesian and it admits a global almost perfect $\bZp$-adic cotangent complex. Moreover,
+    one has a natural equivalence
+        \[
+                \adL_{X^\wedge_p} \simeq (\bL_X  )^\wedge_p \in \Mod_X.
+        \]
+    \todo{Actually, state this in a precise way.}
+\end{remark}
+
+\personal{One would like to have a Representability theorem in the context of derived $\bZp$-adic geometry. Otherwise, it will be difficult to state precisely that geometric stacks like $\Perf$ satisfy geometricity. Another way around this problem, might be by identifying such moduli
+with completion along the ideal $(p) \subseteq \bZp$.}
+\personal{Notice that Artin-Lurie representability holds true for Noetherian $\bE_\infty$-rings such that $\pi_0(R)$ is a Grothendieck ring. In particular, $\bZp$ is an example of such so we do have Artin-Lurie Representability theorem for \emph{algebraic} derived geometric $\bZp$-stacks.}
+
+
+\personal{Notice that we would like that our statements are true more generally. In particular, we would like to be able to treat the case of the moduli of $p$-divisible groups.
+However, this object is not geometric in our sense, since it does not admit a smooth covering. The only obstruction, it seems at this point, is to prove the existence of the local section, since for this we admit that we have
+a smooth covering of the form $P \to Y$.}
+
+\begin{definition}
+    Let $X \colon \adCAlg \to \cS$. We say that $X$ satisfies \emph{faithfully flat-descent} if for every faithfully flat morphism
+        \[
+           f \colon  A \to B  ,
+        \]
+    in the \infcat $\adCAlg$, one has a canonical equivalence
+        \[
+            X(\vC(B/A)) \to  X(A) 
+        \]
+    in the \infcat $\cS$, where $\vC(B/A)$ denotes the \emph{$p$-complete $\vC$ech nerve} associated to the morphism $f \colon A \to B$.
+    \todo{Define the $p$-complete Cech nerve.}
+\end{definition}
+
+\begin{lemma}
+    Let $X \in \Shv(\CAlg_{\bZp}, \tau_\et)$ denote an \'etale sheaf with respect to the site $(\adCAlg, \tau_\et)$. Assume further that $X$ satisfies \emph{fpqc}-descent. Then the $p$-completion
+        \[
+                X^\wedge_p \colon \adCAlg \to \cS  
+        \]
+    also satisfies $\fpqc$-descent.
+\end{lemma}
+
+\begin{proof}
+    The result is an immediate consequence of the fact that limits preserve limits. \todo{expand this proof.}
+\end{proof}
+
+\subsection{Integral perfectoid algebras}
+
+Let $R \in \adCAlg$ denote a $\pi$-adically complete and separated, for some element $\pi \in R$, (discrete) $\bZp$-algebra. Denote by
+    \[
+        \varphi \colon R/ pR \to R/p  R
+    \]
+the \emph{absolute Frobenius} of $R/pR$. We define the \emph{tilt} of $S$, denoted $S^\flat$, as the inverse limits
+    \[
+        S^\flat \coloneqq \lim_{\varphi} R/ pR, 
+    \]
+which is a \emph{perfect $\bF_p$-algebra.}
+
+\begin{definition}
+    We define \emph{Fontaine's ring} associated to $R$ as
+        \[
+                \Ainf(R) \coloneqq W(R^\flat).
+        \]
+    \personal{Maybe one can define $\Ainf(R)$ already as the pro-completion over the kernel of the projection map $\Ainf(R) \to R$.}
+\end{definition}
+
+
+\begin{definition}
+Let $R \in \adCAlg$. We say that $R$ is an \emph{integral perfectoid $\bZp$-algebra} if if satisfies the following conditions:
+    \begin{enumerate}
+            \item There exists an element $\pi \in R$ such that $R$ is $\pi$-adically complete and such that $\pi^p \vert p$;
+            \item The Frobenius morphism    
+                        \[
+                                \varphi \colon R/p R \to R/ pR
+                        \]  
+                  is surjective;
+            \item The kernel of the canonical morphism $\theta \colon \Ainf(R) \to R$ is generated by a single element.
+    \end{enumerate}
+\end{definition}
+
+\begin{example} The following is a transcription of \cite[Example 3.6]{bhatt2018integral}.
+    If $R $ is such that $pR = 0$, then $R$ is necessarily perfect. Let $\cycbZp \coloneqq (\bZp[\zeta_{p^\infty}])^\wedge_p$ denote the $p$-adic completion of the ring of integers of the cyclotimic extension $\bQ_p(\zeta_{p^\infty}) / \bQ_p$. Then $\bZp^\cyc$ is a perfectoid $\bZp$-algebra.
+    Replacing $\bQ_p(\zeta_{p^\infty})$ by any other algebraic extension of it and taking the ring the $p$-adic completion of its ring of integers provides also an integral perfectoid $\bZp$-algebra.
+    The $p$-adic complete ring $\bZp^\cyc \langle T^{1/p^\infty} \rangle$ is itself a perfectoid $\bZp$-algebra. So it is the perfectoid torus, $\bZp^\cyc \langle T^{\pm 1/p^\infty} \rangle$.
+\end{example}
+
+\begin{lemma}
+    Let $R \in \adCAlg$ be an integral perfectoid $\bZp$-algebra which is $p$-torsion free. Then $R$ is (derived) $p$-complete.
+\end{lemma}
+
+\begin{proof}
+    Let $R \in \adCAlg$ be an integral perfectoid $\bZp$-algebra which we assume further to be $p$-torsion free. We wish to show that $R$ is $p$-complete. Thanks to \cite[Lemma 8.1.2.3]{lurie2016spectral}, it suffices to show that the canonical map
+        \[
+            R \to \lim_{n \geq 1} R_n
+        \]  
+    is an equivalence in the \infcat $\adCAlg$. In our situation, we can identify, for each $n \geq 1$, 
+        \[
+            R_n \simeq R \otimes_{\bZp} \bZ/ p^n\bZ .
+        \]
+    Therefore, for each integer $i \geq 0$, $\pi_i(R_n) = 0$, except in the case where $i=0, \ 1$, in which we have $\pi_1(R_n) = R[p^n] =0$ and $\pi_0(R_n) = R/p^n$. Passing to inverse limits, the Milnor short exact sequence implies that $\pi_i(R^\wedge_p) =0$ for $i>0$. For $i=0$, we have a Milnor short exact sequence of the form
+        \begin{equation} \label{p-tors_perf}
+            0 \to \lim^1_{n \geq 1} \pi_0(R_n) \to \pi_0(R^\wedge_p) \to \lim_{n \geq 1} \pi_0(R_n)= R \to 0.
+        \end{equation}
+    Since the the transition maps in the pro-system $\{ R/p^n \}_{n \geq 1}$ are surjective, it follows that the left hand side in \eqref{p-tors_perf} vanishes. Therefore, one obtains an equivalence $R^\wedge_p \simeq R$, as desired.
+\end{proof}
+
+The following result is of fundamental importance for our purposes in the current text:
+
+\begin{proposition} \label{prop_non_obs_perf}
+    Let $R \to S$ be a morphism between integral perfectoid $\bZp$-algebras in the \infcat $\adCAlg$. Then $\adL_{S/R} \simeq 0$.
+\end{proposition}
+
+\begin{proof}
+    This is the content of \cite[Proposition 3.14]{bhatt2018integral}.
+\end{proof}
+
+\begin{remark}
+    Let $f \colon R \to S$ be a morphism between integral perfectoid $\bZp$-algebras in the \infcat $\adCAlg$. Thanks to \cref{prop_non_obs_perf} it follows, in particular, that
+        \[
+                \adL_{S/ R} \otimes_{R} R_1 \simeq 0  .
+        \]
+    As a consequence, the morphism $f \colon R \to S$ is \emph{formally \'etale}. As a consequence, the morphism induced by $f $, at the level of tiltings,
+        \[
+               \overline{f}^\flat \colon (R/p)^\flat   \to (S/ p)^\flat
+        \]
+    lifts, by taking the Witt-vectors construction, to a deformation $f_\mathrm{inf} \colon \Ainf(R) \to \Ainf(S)$ which is the unique (up to isomorphism) such deformation of the morphism $f$. Moreover, since 
+        \[
+            S \simeq \Ainf(S) \otimes_{\Ainf(R)} R
+        \]
+    in the \infcat $\adCAlg$ it follows that $f_{\inf}$ is the universal
+    deformation of $f$.
+\end{remark}
+
+\begin{lemma}
+    Let $R \in \adCAlg$ denote an integral perfectoid $\bZp$-algebra. Then $\Ainf(R) \in \adCAlg$ is $p$-torsion free.
+\end{lemma}
+
+\begin{proof}
+    By construction, we have that $\Ainf(R) = W((R/pR)^\flat)$. The $\bF_p$-algebra $(R/p)^\flat$ is a perfect $\bF_p$-algebra. For this reason, $W((R/pR)^\flat)$ is $p$-torsion free.
+    \todo{This result is certainly true, however a reference is still needed here.}
+\end{proof}
+
+The following two results will establish the precise relation between $\Ainf(R) $ and $R$, via obstruction theory, for perfectoid $R$:
+
+\begin{lemma}
+    The morphism $\theta \colon \Ainf(R) \to R$ is a pro-thickening morphism.
+\end{lemma}
+
+\begin{proof}
+    This is a result due Fontaine.
+\end{proof}
+
+\begin{proposition} \label{Ainf_de_Rham}
+    Let $R \in \adCAlg$ be a $p$-torsion free integral perfectoid $\bZp$-algebra. Then for every $p$-complete $A \in \adCAlg$ we have a natural equivalence of mapping spaces
+        \[
+               \theta \colon \Map_{\adCAlg}(\Ainf(R), A) \simeq   \Map_{\adCAlg}(R, \pi_0(A)_\mathrm{red}) .
+        \]
+\end{proposition}
+
+\begin{proof}
+    Let $f \colon R \to \pi_0(A)_\mathrm{red}$ denote a continuous $p$-adic morphism. Given any continuous morphism $f \colon R \to \pi_0(A)_\mathrm{red}$ we obtain, by base change along the morphism $\bZp \to \bF_p$, a well defined morphism
+        \[
+            \overline{f}_{\mathrm{red}, 1} \colon (R/p)^\flat \to \pi_0(A)_{\mathrm{red}, 1} . 
+        \]
+    Since $(R/p)^\flat $ is a perfect $\bF_p$-algebra, it follows that $\overline{f}_1$ lifts canonically to a uniquely (up to isomorphism) defined morphism of $\bF_p$-algebras
+        \[
+            \overline{f}_1 \colon (R/p)^\flat \to \pi_0(A)_1.  
+        \]
+    We shall prove, by induction on the Postnikov tower for $A \in \adCAlg$, that $overline{f}_1$ lifts uniquely (up to a contractible space of indeterminacy) to a well defined morphism
+        \[
+            \overline{f}_1 \colon (R/p)^\flat \to A_1.
+        \]
+    The case $n=0$ has already been dealt with. Suppose now that for $n \geq 0$ we have constructed a unique, up to contractible indeterminacy, morphism
+        \[
+            \overline{f}(n) \colon (R/p)^\flat \to \tau_{\leq n} A_1  
+        \]
+    in the \infcat $\adCAlg$. Indeed, consider the natural derivation, at level $n$ for $A$,
+        \[
+                d_n \colon \tau_{\leq n} A_1 \to \tau_{\leq n}A_1 \oplus \pi_{n+1}(A_1)[n+2].
+        \]
+    Pre-compositoin with $\overline{f}_1(n) \colon (R/p)^\flat \to \tau_{\leq n}A_1$ induces a morphism 
+        \[
+                (R/p)^\flat \to \tau_{\leq n}A_1 \to \tau_{\leq n}A   \oplus \pi_{n+1}(A_1)[n+2],
+        \]
+    over $\tau_{\leq n}A$. Moreover, we have canonical identification of mapping spaces
+        \[
+                \Map_{\big(\cC \mathrm{Alg}^\ad_{(R/p)^\flat}\big)_{/ \tau_{\leq n}(A_1) }} \big((R/p)^\flat, \tau_{\leq n}A_1 \oplus \pi_{n+1}(A_1)[n+2] \big) \simeq
+                \Map_{\Mod_{(R/p)^\flat}} \bigg(\adL_{(R/p)^\flat}, \pi_{n+1}(A_1) [n+2] \bigg)
+        \]
+    As $(R/p)^\flat$ is a perfect $\bF_p$-algebra, it follows that $\adL_{(R/p)^\flat} \simeq 0 $. Therefore, the morphism $\overline{f}_1(n)$ lifts uniquely into a morphism a well defined morphism
+        \[
+                \overline{f}_1(n+1) \colon (R/p)^\flat \to \tau_{\leq n+1}A_1,  
+        \]
+    in the \infcat $\adCAlg$ and the inductive step is proved. Passing to inverse limits we obtain a well defined morphism
+        \[
+                \overline{f}_1 \colon (R/p)^\flat \to A_1
+        \]
+    in the \infcat $\adCAlg$.
+    Moreover, as $(R/p)^\flat$ is a perfect $\bF_p$-algebra, it follows that $\Ainf(R)/p^n \simeq W_n(R/p^\flat)$ in the \infcat $\adCAlg$. By the universal property of $p$-typical Witt vectors one obtains, for each integer $n \geq 1$, uniquely defined (up to contractible indeterminacy) morphisms
+        \[
+            \overline{f}_n \colon \Ainf(R)/p^n \to A_n.
+        \]  
+    \personal{Notice that the universal property of Witt vectors is derived in nature. For example, given two objects $A, \ B \in \adCAlg$ we can find resolutions by polynomial algebras of these, seen as $\bZp$-simplicial algebras.
+    We obtain thus a morphism of simplicial polynomial algebras of the form $ \varphi \colon P_\bullet \to Q_\bullet$. If $Q_\bullet$ is defined over some $\bZ_p/p^n$ then applying Witt vectors component-wise to $P_\bullet$ provides a uniquely defined (up to contractible homotopy) $W_n(P_\bullet) \to Q_\bullet$ and thus $W_n(A) \to B$ in $\adCAlg$.}
+    Passing to the limit one obtains a unique lift (up to contractible indeterminacy) $\overline{f} \colon \Ainf(R) \to A$. 
+    \personal{One still does not have showed the contractibility of the fiber of the morphism $\theta$, but our reasoning applies to show contractibility of higher coherences, since everything is done via universal properties.} \todo{Write this more precisely}
+
+\end{proof}
+
+
+\begin{corollary}
+    Let $R \in \adCAlg$ be an integral perfectoid $\bZp$-algebra. Then $\Spf (\Ainf(R)) \simeq \big( \Spf(R) \big)_\dR$ in the \infcat $\Shv_\fpqc(\adCAlg)$.
+\end{corollary}
+
+\begin{proof}
+    This is a direct consequence of \cref{Ainf_de_Rham} and the construction of the de Rham stack associated to a formal spectrum. \todo{Write this a bit better.}
+\end{proof}
+
+The following result shows that every object $A \in \adCAlg$ which is regular and Noetherian admits a faithfully flat map to a perfectoid ring:
+
+\begin{theorem}
+    Let $A \in \adCAlg$ be a discrete $\bZp$-adic algebra. Then $A$ is Noetherian and regular if and only if exists a faithfully flat morphism
+        \[
+                A \to A_\infty  ,
+        \]
+    in the \infcat $\adCAlg$, where $A_\infty \in \adCAlg$ is an integral perfectoid $\bZp$-algebra.
+\end{theorem}
+
+\begin{proof}
+    This is precisely the content of the main result \cite[Theorem 4.7]{bhatt2019regular}.
+\end{proof}
+
+\begin{remark}
+    Let $\bT^n \coloneqq \Spf (\bZp \langle T_1^{\pm 1}, \dots , T_n^{\pm 1} \rangle)$ denote the formal torus of dimension $n$. We define
+        \[
+                \bT^n(p^\infty) \coloneqq \Spf ( \cycbZp \langle T_1^{\pm 1/p^\infty}, \dots, T_n^{\pm 1/p^\infty})  .
+        \]
+    We have a canonical morphism
+        \[
+            \pi_n \colon \bT^n(p^\infty) \to \bT^n  
+        \]
+    which is an fpqc-covering and exhibits $\bT^n(p^\infty)$ as a $\Gamma \coloneqq \bZp(1)^n$-torsor over $\bT^n$. \todo{justify this with a refenrece. Does $\Gamma$ really have the correct dimension?}
+    In this case, we construct an explicit faithfully flat covering of $\bT^n$. Moreover, suppose that we have an \'etale morphism \todo{Does \'etale really suffices or do we really finite \'etale? Check this.}
+        \[
+                \Spf R \to \bT^n,
+        \]
+    where $ R \in \adCAlg$. Then we have a perfectoid covering
+        \[
+                \Spf (R_\infty) \to \Spf(R)  
+        \]
+    where $R_\infty \coloneqq R \otimes_{\bZp \langle T_1^{\pm 1}, \dots , T_n^{\pm 1} \rangle} \cycbZp \langle T_1^{\pm 1/p^\infty}, \dots, T_n^{\pm 1/p^\infty} \rangle$.
+    Then $R_\infty$ is an integral perfectoid $\bZp$-algebra,\todo{Check this!} which provides us with a faithfully flat morphism
+        \[
+                R \to R_\infty    
+        \] 
+    in the \infcat $\adCAlg$. \todo{Check that $\Spf R_\infty$ is quasi-compact.}
+\end{remark}
+
+\subsection{Smooth morphisms between derived $\bZp$-adic geometric stacks}
+
+In this \S we wish to prove the following:
+
+\begin{theorem}
+    Let $f \colon X \to Y$ denote a smooth morphism in the \infcat $\adSt$. Then, locally on both $X$ and $Y$, $f$ can be factored as a composite
+        \[
+        \begin{tikzcd}
+                X \ar{r}{g} & Y \times \fA^n_{\bZp} \ar{r}{\mathrm{pr}_1} & Y
+        \end{tikzcd}
+        \]
+    where $g$ is an \'etale map of derived $\bZp$-adic geometric stacks and $\pr$ denotes the canonical projection.
+\end{theorem}
 \subsection{Assumptions}
 
 First of all we will define the context in which we are going to work through.  Let us denote $\adCAlg$ the \infcat of adic $\bZp$-simplicial algebras, introduced in \cite{antonio2018p}. We consider the \infcat $\adSt(\adCAlg, \tau_{\et}, \rmP_{\sm})$ of \emph{derived $\bZp$-adic geometric stacks}.
