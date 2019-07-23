@@ -96,7 +96,6 @@
 \address{Joost Nuiten, IMAG Universit\'e de Montpellier, Place Eug\`{e}ne Bataillon
 34090 Montpellier}
 
-
 \date{}
 
 \title{A Van Est theorem in mixed characteristic} 
@@ -115,9 +114,42 @@
 \section{Geometric context}
 \personal{Does one really needs to work locally for the fpqc topology or can we refine the topology further by dropping the quasi-compactness assumption?}
 
-\subsection{$\bZp$-adic geometric stacks}
+\subsection{Derived $\bZp$-adic geometric stacks} In this \S we give an overview of the construction of the \infcat of derived $\bZp$-adic geometric stacks.
 
-Let $\adCAlg$ denote the \infcat of simplicial $\bZp$-adic algebras. 
+\begin{definition}
+    Let $\CAlg^\ad$ denote the \infcat defined via the pullback square
+        \[
+        \begin{tikzcd}
+            \CAlg^\ad \ar{r} \ar{d} & \CAlg \ar{d}{\pi_0(-)} \\
+            \CAlg^{\heartsuit, \ad} \ar{r} & \CAlg^\heartsuit
+        \end{tikzcd}
+        \]
+    computed in the \infcat $\Cat$. We refer to $\CAlg^\ad$ as the \infcat of \emph{simplicial adic algebras}. Let $A \in \CAlg^\ad$ be a simplicial $A$-adic algebra, we define the \infcat of simplicial $A$-adic algebras assertion
+        \[
+                \CAlg^\ad_{A} \coloneqq (\CAlg^\ad)_{A/}  .
+        \]
+    Of principal importance for us is the \infcat $\adCAlg$, where we regard $\bZp \in \CAlg^{\heartsuit, \ad}$ equipped with its $(p)$-adic topology.
+\end{definition}
+
+Let $f \colon A \to B$ be a morphism of simplicial $\bZp$-adic algebras. The \emph{relative $\bZp$-adic cotangent complex}, denoted $\adL_{B/A} \in \Mod_B$, is defined in \cite[\S 3.4]{antonio2018p}. It corepresents $\bZp$-adic derivations of simplicial $\bZp$-adic algebras.
+In particular, we have a natural equivalence of mapping spaces 
+    \[
+            \Map_{\Mod_B}(\adL_{B/A}, M) \simeq \Map_{\CAlg^{\ad}_{A/ / B}}(B , B \oplus M) \in \cS,
+    \]  
+for every $M \in \Mod_B$.
+
+\begin{definition}
+    Let $f \colon A \to B $ be a morphism in the \infcat $\adCAlg$ between $p$-complete simplicial $\bZp$-adic algebras. We say that $f$ is \emph{topologically almost of finite presentation} if
+        \[
+            \pi_0(f) \colon \pi_0(A) \to \pi_0(B)  
+        \]
+    is a topologically of finite presentation morphism between ordinary $p$-adic complete $\bZp$-adic algebras and, for every integer $i>0$,
+        \[
+                \pi_i(B) \in \Mod_{\pi_0(A)}  
+        \]
+    is a finitely presented $\pi_0(A)$-module.
+\end{definition}
+
 
 \begin{definition}
     Let $f \colon A \to B$ be a morphism in the \infcat $\adCAlg$. The morphism $f$ is said to be \emph{\'etale} (resp., \emph{smooth}) if it is \emph{almost topologically of finite presentation} and the relative cotangent complex
@@ -127,19 +159,51 @@ Let $\adCAlg$ denote the \infcat of simplicial $\bZp$-adic algebras.
     vanishes (resp. it is equivalent to a free $B$-module of finite rank concentrated in degree $0$).
 \end{definition}
 
-\begin{definition}
-    Let $\rmP_\sm$ denote the class of smooth morphisms in the \infcat $\adCAlg$. The triplet $(\adCAlg, \tau_\et, \rmP_\sm)$ forms a \emph{geometric context}, which we refer to as the \emph{derived $\bZp$-adic geometric context}.
-\end{definition}
 
 \begin{definition}
-    The \infcat of \emph{derived $\bZp$-adic geometric stacks} is defined as the \infcat of geometric stacks
-        \[
-             \adSt \coloneqq \dSt( \adCAlg, \tau_\et, \rmP),
-        \]
-    with respect to the derived $\bZp$-adic geometric context.
+    Let $\rmP_\sm$ denote the class of smooth morphisms in the \infcat $\adCAlg$. The triplet $(\adCAlg, \tau_\et, \rmP_\sm)$ forms a \emph{geometric context}, which we refer to as the \emph{derived $\bZp$-adic geometric context}. For the definition of
+    the notion of geometric stack we refer the reader to \cite[Definition 2.3.1]{antonio2017moduli}.
 \end{definition}
 
 \begin{remark}
+    Notice that the conditions (ii) and (iii) in \cite[Definition 2.3.1]{antonio2017moduli} are automatic. Condition (iv) follows from the local structure for smooth morphisms and
+    condition (i) (and furhter faithfully flat descent) follows from \cite[Proposition 3.2.9]{antonio2018p} together with \cite[Theorem 5.15]{Lurie_Spectral_Schemes} combined with \cite[Proposition 8.1.2.1]{lurie2016spectral}.
+\end{remark}
+
+\begin{definition}
+    The \infcat of \emph{derived $\bZp$-adic geometric stacks} is defined as the full subcategory of $\Shv(\adCAlg, \tau_\et)$ spanned by geometric stacks with respect to the geometric context $(\adCAlg, \tau_\et, \rmP_\sm)$,
+        \[
+             \adSt \coloneqq \dSt( \adCAlg, \tau_\et, \rmP).
+        \]
+\end{definition}
+
+\begin{remark}
+    The \infcat $\Shv(\adCAlg, \tau_\et)$ is \emph{closed under $\tau_\et$-descent}. This assertion is a consequence of \cite[Proposition 5.16, (3)]{Lurie_Spectral_Schemes}.
+\end{remark}
+
+\begin{example}
+    In \cite[Definition 3.2.10]{antonio2018p} it was introduced the notion of a \emph{derived $\bZp$-adic Deligne-Mumford stack}. The collection of such objects forms naturally an \infcat, denoted $\dfDM_{\bZp}$.
+    Let $\sfX \in \dfDM_{\bZp}$, then its associated functor of points is naturally an object in the \infcat $\Shv(\adCAlg, \tau_\et)$ and even an object in the \infcat $\Shv(\adCAlg, \tau_\fpqc)$, thanks to \cite[Theorem 5.15]{Lurie_Spectral_Schemes} combined with \cite[Proposition 8.1.2.1]{lurie2016spectral}.
+    Therefore the association 
+        \[
+            \sfX \in \dfDM_{\bZp} \mapsto \Map_{\dfDM}(\Spf(-), \sfX) \in \Shv(\adCAlg, \tau_\et)  
+        \]
+    provides us with a fully faithful functor 
+        \[
+            F \colon \dfDM_{\bZp} \subseteq \Shv(\adCAlg, \tau_\et).
+        \]
+    In particular, if $\sfX \in \dfSch_{\bZp}$ is a derived $\bZp$-adic scheme, then we can regard it naturally
+    as an \'etale sheaf on $\adCAlg$.
+
+    We further assert that the fully faithful functor $F \colon \dfDM_{\bZp} \to \Shv(\adCAlg, \tau_\et)$ factors through the fully faithful natural inclusion $\adSt \subseteq \Shv(\adCAlg, \tau_\et)$.
+    Indeed, since the \infcat $\Shv(\adCAlg, \tau_\et)$ is closed under $\tau_\et$-descent we are reduced to verify condition (1) in \cite[Definition 2.3.3]{antonio2017moduli} for derived $\bZp$-adic Deligne-Mumford stacks. This last assertion is immediate from the fact that derived $\bZp$-adic Deligne-Mumford stacks admit
+    (affine) \'etale coverings, by construction. We have thus a natural fully faithful functor
+        \[
+                G \colon \dfDM_{\bZp} \to \adSt.    
+        \] 
+\end{example}
+
+\begin{construction}
     Let $
             L_p^\wedge \colon \CAlg_{\bZp} \to \adCAlg
         $
@@ -153,9 +217,12 @@ Let $\adCAlg$ denote the \infcat of simplicial $\bZp$-adic algebras.
     computed in \infcat $\CAlg_{\bZp}$. Notice that $A_n$ is naturally an object of the \infcat $\adCAlg$ via the canonical inclusion $\adCAlg \subseteq \CAlg_{\bZp}$.
     Thanks to \cite[Lemma 8.1.2.3]{lurie2016spectral}, one has a natural equivalence
         \[
-            (A)^\wedge_p \simeq \lim_{\geq 1} A_n,  
+            (A)^\wedge_p \simeq \underset{n\geq 1}{\lim} A_n,  
         \]
     in the \infcat $\adCAlg$, where $(A)^\wedge_p$ denotes the $p$-completion of $A$.
+\end{construction}
+
+\begin{remark}
     Given a functor $X \colon \CAlg_{\bZp} \to \cS$, we define its \emph{$p$-completion} as the functor
         \[
                 X^\wedge_p \colon \adCAlg \mapsto \cS  
@@ -165,40 +232,81 @@ Let $\adCAlg$ denote the \infcat of simplicial $\bZp$-adic algebras.
                 A \in \adCAlg \mapsto \lim_{n \geq 1} X(A_n) \in \cS.  
         \end{equation}
     From the above formula \eqref{p-comp_stacks}, it is clear that if $X$ satisfies \'etale hyper-descent then so it does $X^\wedge_p$ satisfies descent with respect to $\tau_\et$-hypercoverings in $(\adCAlg, \tau_\et)$.
-    Suppose now that $X \in \dSt( \CAlg_{\bZp}, \tau_\et, \rmP_\sm)$ denotes an (algebraic) derived $\bZp$-geometric stack. Then the $p$-completion of the corresponding functor of points,
-    which we shall simply denote by $X^\wedge_p$, is naturally a derived $\bZp$-adic geometric stack, i.e., $X^\wedge_p \in \adSt$.
-    To see this, let
+    The same statement holds if we replace \'etale hyper-descent by fpqc hyper-descent.
+\end{remark}
+
+\begin{lemma} \label{const_of_adic_geom_stacks}
+    Let $X \in \dSt( \CAlg_{\bZp}, \tau_\et, \rmP_\sm)$ be a geometric stack with respect to the (derived) algebraic geometric context
+        \[
+            (\CAlg_{\bZp}, \tau_\et, \rmP_\sm).  
+        \] 
+    Then the $p$-completion of $X$, $X^\wedge_p \in \Shv(\adCAlg, \tau_\et)$,
+    is geometric, i.e., $X^\wedge_p \in \adSt$.
+\end{lemma}
+
+\begin{proof} Suppose $X$ is $n$-geometric, for a given integer $n \geq 0$. Let
         \[
                 \pi \colon P \to X  ,
         \]
-    be a smooth covering of $X$ where $P \in \dSch$ is a derived $\bZp$-scheme. Then
+    denote a smooth $(n-1)$-representable covering of $X$. We shall prove that the \emph{$p$-adic completion}
+    \[
+            (\pi)^\wedge_p \colon P^\wedge_p \to X^\wedge_p    
+    \] 
+    is itself a $(n-1)$-representable morphism with respect to the geometric context $(\adCAlg, \tau_\et, \rmP_\sm)$. Consider the pullback square
         \[
-                (
-                \pi
-                )^\wedge_p \colon P^\wedge_p \to X^\wedge_p  
+        \begin{tikzcd}
+                Y \ar{r} \ar{d} & P^\wedge_p \ar{d}{(\pi)^\wedge_p} \\
+                \Spf A \ar{r} & X^\wedge_p,
+        \end{tikzcd}
         \]
-    is still a smooth covering of $X^\wedge_p$ by the derived $\bZp$-adic scheme, $P^\wedge_p$.
+    computed in the \infcat $\Shv(\adCAlg, \tau_\et)$. By construction, $Y$ can be realized as a limit diagram of pullback diagrams of the form
+        \[
+        \begin{tikzcd} 
+            Y_n \ar{r} \ar{d} & P_n \ar{d}{\pi_n} \\
+            \Spec A_n \ar{r} & X_n,
+        \end{tikzcd}    
+        \]
+    computed in the \infcat $\dSt(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$, where the subscript $(-)_n$ denotes the reduction modulo the ideal $(p^n) \subseteq \bZp$. As $\pi_m$ is $(n-1)$-representable, for each $m \geq 1$, it follows that each
+    $Y_m \in \Shv(\CAlg_{\bZp}, \tau_\et)$ is $(n-1)$-represntable. Therefore, we are reduced to show that the filtered colimit
+        \[
+            Y \simeq \underset{m \geq 1}{\colim} Y_m  
+        \]
+    is $(n-1)$-representable. As filtered colimits are preserved under finite limites we reduce ourselves, by induction on the geometric level, to the case $n= 0$. When $n=0$, the result follows from the universal property of the formal spectrum,
+    proved in \cite[Proposition 8.1.2.1]{lurie2016spectral}.
+\end{proof}
 
-    More generally, given a compatible \emph{ind-system}, $\{X_n \}_{n \geq 1}$, where for each $n \geq 1$, $X_n$ denotes a derived $\bZ/p^n$-geometric stack. Then the induced functor
-        \[
-            \colim_{n \geq 1} X_n \colon \adCAlg \to \cS  
-        \]
-    is naturally a derived $\bZp$-adic geometric stack.
-\end{remark}
+\begin{corollary} \label{cor_adic_geom_stacks}
+    Let $\{X_n \}_{n \geq 1}$ denote a compatible \emph{ind-system} in the \infcat $\dSt(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$, where for each $n \geq 1$,
+    $X_n$ denotes a derived $\bZ/p^n$-geometric stack. Then the induced functor
+    \[
+        \colim_{n \geq 1} X_n \colon \adCAlg \to \cS  
+    \]
+is naturally a derived $\bZp$-adic geometric stack.
+\end{corollary}
+
+\begin{proof}
+    The proof follows exactly the same lines as the proof of \cref{const_of_adic_geom_stacks}.
+\end{proof}
 
 \begin{example}
-    Let $X \in \dSch$ denote a derived $\bZp$-scheme, then its $p$-completion, $X^\wedge_p$ is naturally an object in the \infcat $\adSt$. Of interest to us will be the derived moduli stack parametrizing perfect complexes, $\Perf$ and classifying spaces of formal groups or $p$-divisible groups.
+    Both \cref{const_of_adic_geom_stacks} and \cref{cor_adic_geom_stacks} allow us to construct many interesting derived $\bZp$-adic geometric stacks. Indeed,
+    let $X \in \dSch$ denote a derived $\bZp$-scheme, then its $p$-completion, $X^\wedge_p$ is naturally an object living the \infcat $\adSt$. 
+
+    Given a $\bE_\infty$-group object in the \infcat $G \in \dSt(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$, the classifying space of the corresponding $p$-completion $\rmB G^\wedge_p \in \adSt$. Similarly, one can also consider classifying spaces of formal $\bZp$-formal groups
+    as derived $\bZp$-adic geometric stacks.
+    
+    The $p$-completion of the derived moduli stack parametrizing perfect complexes, $\mathrm{Perf}$ is also naturally an object in the \infcat $\adSt$. So it is, the (derived) moduli stack classifying formal groups or $p$-divisible groups in mixed characteristic.
     Given any formal reductive group $G$, $\mathrm{Bun}_G$ also lives naturally in the \infcat $\adSt$.
 \end{example}
 
 \begin{remark}
-    Let $X \in \St(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$. Thanks to Artin-Lurie representability theorem, \cite[?]{lurie2012dag}, the functor of points associated to $X$ is nilcomplete, infinitesimally cartesian
-    and it admits a global algebraic cotangent complex, which is an almost perfect complext on $X$. From the definitions, it is clear that $X^\wedge_p$ also possedes these properties, namely it is nilcomplete, infinitesimally cartesian and it admits a global almost perfect $\bZp$-adic cotangent complex. Moreover,
+    Let $X \in \St(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$. Thanks to Artin-Lurie representability theorem, \cite[Theorem 3.1.2]{lurie2012dag}, the functor of points associated to $X$ is nilcomplete, infinitesimally cartesian
+    and it admits a global algebraic cotangent complex, which is an almost perfect complext on $X$. From the definitions, it is clear that $X^\wedge_p$ also possedes these properties, namely its corresponding functor of points is nilcomplete, infinitesimally cartesian and it admits a global almost perfect adic cotangent complex. Moreover,
     one has a natural equivalence
         \[
-                \adL_{X^\wedge_p} \simeq (\bL_X  )^\wedge_p \in \Mod_X.
+                \adL_{X^\wedge_p} \simeq (\bL^\alg_X  )^\wedge_p \in \Mod_{X^\wedge_p},
         \]
-    \todo{Actually, state this in a precise way.}
+    where $\bL^\alg_X$ denotes the (algebraic) cotangent complex of $X \in \dSt(\CAlg_{\bZp}, \tau_\et, \rmP_\sm)$.
 \end{remark}
 
 \personal{One would like to have a Representability theorem in the context of derived $\bZp$-adic geometry. Otherwise, it will be difficult to state precisely that geometric stacks like $\Perf$ satisfy geometricity. Another way around this problem, might be by identifying such moduli
@@ -209,6 +317,8 @@ with completion along the ideal $(p) \subseteq \bZp$.}
 \personal{Notice that we would like that our statements are true more generally. In particular, we would like to be able to treat the case of the moduli of $p$-divisible groups.
 However, this object is not geometric in our sense, since it does not admit a smooth covering. The only obstruction, it seems at this point, is to prove the existence of the local section, since for this we admit that we have
 a smooth covering of the form $P \to Y$.}
+
+\subsection{Brief considerations on fpqc-descent} \todo{Maybe it is more suitable to put this section in appendix.}
 
 \begin{definition}
     Let $X \colon \adCAlg \to \cS$. We say that $X$ satisfies \emph{faithfully flat-descent} if for every faithfully flat morphism
@@ -223,6 +333,29 @@ a smooth covering of the form $P \to Y$.}
     \todo{Define the $p$-complete Cech nerve.}
 \end{definition}
 
+\begin{remark}
+    Let $A \in \adCAlg$ and let $I \subseteq \pi_0(A)$ the defining ideal for $A$. Since we can identify (naturally) the underlying \inftopos of $Spec (A/I)$
+    with the underlying \inftopos of $\Spf A$ we obtain that for each $A \in \adCAlg$, $\Spf A \in \dfSch_{\bZp}$ is quasi-compact.
+\end{remark}
+
+\begin{definition}
+    Let $X \in \dfSch_{\bZp}$. An \emph{fpqc-covering} of $X$ is a family of morphisms $\{ f_i \colon X_i \to X \}$ of derived $\bZp$-adic schemes such that each $f_i$ is flat and such that for every affine open $U \subseteq T$ there exists an $n \geq 0$,
+    a map $\alpha \colon \{1, \dots, n \}$ and affine opens $V_i \subseteq X_{\alpha(i)}$, $j=1, \dots, n$ with $\bigcap_{j=1}^n f_{\alpha(i)}(V_j) = U$.
+\end{definition}
+
+\begin{definition}
+    Let $Y \in \mathrm{PShv}(\adCAlg)$ denote a pre-sheaf on $\adCAlg$. We say that $Y$ satisfies (hyper)-fpqc-descent if for every $\sfX \in \dfSch_{\bZp}$ together with a simplicial object
+        \[
+            U_\bullet \colon \rmN(\Delta^\op) \to \dfSch_{\bZp} , 
+        \]
+    such that each transition map is flat and quasi-compact,
+    together with a canonical map $U_\bullet \to X$ wich is surjective, then the natural map
+        \[
+                Y(X ) \to Y(U_\bullet)  
+        \]
+    is an equivalence in the \infcat $\mathrm{PShv}(\adCAlg)$.
+\end{definition}
+
 \begin{lemma}
     Let $X \in \Shv(\CAlg_{\bZp}, \tau_\et)$ denote an \'etale sheaf with respect to the site $(\adCAlg, \tau_\et)$. Assume further that $X$ satisfies \emph{fpqc}-descent. Then the $p$-completion
         \[
@@ -235,6 +368,13 @@ a smooth covering of the form $P \to Y$.}
     The result is an immediate consequence of the fact that limits preserve limits. \todo{expand this proof.}
 \end{proof}
 
+\begin{proposition}
+    The \infcat of fpqc-sheaves on $\adCAlg$, denoted $\Shv(\adCAlg, \tau_\fpqc)$ is subcanonical.
+\end{proposition}
+
+\begin{proof}
+    This is an immediate consequence of \cite[Theorem 5.15]{Lurie_Spectral_Schemes} together with \cite[Proposition 8.1.2.1]{lurie2016spectral}.
+\end{proof}
 \subsection{Integral perfectoid algebras}
 
 Let $R \in \adCAlg$ denote a $\pi$-adically complete and separated, for some element $\pi \in R$, (discrete) $\bZp$-algebra. Denote by
