@@ -376,8 +376,12 @@ The following two results will establish the precise relation between $\Ainf(R) 
     over $\tau_{\leq n}A$. Moreover, we have canonical identification of mapping spaces
         \[
                 \Map_{\big(\cC \mathrm{Alg}^\ad_{(R/p)^\flat}\big)_{/ \tau_{\leq n}(A_1) }} \big((R/p)^\flat, \tau_{\leq n}A_1 \oplus \pi_{n+1}(A_1)[n+2] \big) \simeq
-                \Map_{\Mod_{(R/p)^\flat}} \bigg(\adL_{(R/p)^\flat}, \pi_{n+1}(A_1) [n+2] \bigg)
+                \Map_{\Mod_{(R/p)^\flat}} \bigg(\adL_{(R/p)^\flat}, \pi_{n+1}(A_1) [n+2] \bigg).
         \]
+    More precisely, the space of liftings of $(R/p)^\flat \to \tau_{\leq n}A_1$ to the square-zero extension $\tau_{\leq n+1} \to \tau_{\leq n}$ is controlled by the mapping space
+        \[
+            \Map_{\Mod_{(R/p)^\flat}} \bigg(\adL_{(R/p)^\flat}, \pi_{n+1}(A_1) [n+2] \bigg) \simeq 0.
+        \]  
     As $(R/p)^\flat$ is a perfect $\bF_p$-algebra, it follows that $\adL_{(R/p)^\flat} \simeq 0 $. Therefore, the morphism $\overline{f}_1(n)$ lifts uniquely into a morphism a well defined morphism
         \[
                 \overline{f}_1(n+1) \colon (R/p)^\flat \to \tau_{\leq n+1}A_1,  
@@ -400,13 +404,71 @@ The following two results will establish the precise relation between $\Ainf(R) 
 
 
 \begin{corollary}
-    Let $R \in \adCAlg$ be an integral perfectoid $\bZp$-algebra. Then $\Spf (\Ainf(R)) \simeq \big( \Spf(R) \big)_\dR$ in the \infcat $\Shv_\fpqc(\adCAlg)$.
+    Let $R \in \adCAlg$ be an integral perfectoid $\bZp$-algebra. Then $\Spf (\Ainf(R)) \simeq \big( \Spf(R) \big)_\dR$ in the \infcat $\Shv_\fpqc(\adCAlg)$, where we consider $\Ainf(R)$ with its $(p, \varepsilon)$-adic topology.
 \end{corollary}
 
 \begin{proof}
     This is a direct consequence of \cref{Ainf_de_Rham} and the construction of the de Rham stack associated to a formal spectrum. \todo{Write this a bit better.}
 \end{proof}
 
+\begin{proposition}
+Consider a pullback diagram of the form
+    \[
+    \begin{tikzcd}
+            \Spf(S) \ar{r} \ar{d}{f} & \tP \ar{d}{\widetilde{f}} \\
+            \Spf(R) \ar{r} & \Spf (\Ainf(R))
+    \end{tikzcd}
+    \]
+in the \infcat $\dfSch$, where $S$ and $R$ are $p$-torsion free integral perfectoid and we consider $\Ainf(R)$ with its natural $(p, \varepsilon)$-adic topology. Then $\tP \simeq \Spf (\Ainf(S))$. 
+\end{proposition}
+
+\begin{proof} Notice first that $\tP$ is a thickening of $\Spf(S)$ and the morphism $\tP \to \Spf(\Ainf(R))$ is a deformation of the morphism $\Spf(S) \to \Spf(R)$.
+    Thanks to \cite[\href{https://stacks.math.columbia.edu/tag/06AD}{Tag 06AD}]{stacks-project} it follows that $\tP$ is affine. Therefore we can write
+        \[
+            \tP \simeq \Spf A,
+        \]
+    where $A$ is a simplicial $\bZp$-adic algebra. \cref{prop_non_obs_perf} implies that $\adL_{S/ R} \simeq 0$. Moreover, thanks to \cite[Theorem 8.4.2.7]{Lurie_Higher_algebra} \todo{Update the new version of HA in bib!} thus any deformation of the morphism $f$ over $\Spf(\Ainf(R)/\varepsilon^n)$, for $n \geq 1$, is controlled by the mapping space
+        \[
+                \Map_{\Mod_S}(\adL_{S/R}, S \otimes_R ( \varepsilon)) \simeq 0.
+        \]  
+    Therefore, such deformation must be unique (up to contractible indeterminacy). Since the morphism
+        \[
+            \Ainf(S)/(\varepsilon_S^n) \to \Ainf(R)/(\varepsilon^n)
+        \]
+    is such a deformation, we conclude by passage to the limit that we have a canonical equivalence
+        \[
+                \tP \simeq \Spf(\Ainf(S))  
+        \]
+    and the morphism $\widetilde{f} \colon \tP \to \Spf(\Ainf(R))$ coincides with the morphism induced by the canonical map
+        \[
+                \Ainf(R) \to \Ainf(S)
+        \]
+    uniquely induced by the morphism $R \to S$.
+\end{proof}
+
+
+\subsection{de Rham stack}
+
+\begin{definition}
+    Let $X \in \Shv(\adCAlg, \tau_\et)$ denote an \'etale sheaf on $\adCAlg$. Then, we defined its associated \emph{de Rham sheaf} 
+        \[
+            X_\dR \colon \adCAlg \to \cS
+        \]  
+    given on objects by the formula
+        \[
+            A \in \adCAlg \mapsto X(\pi_0(A)_\red) \in \cS. 
+        \]
+\end{definition}
+
+\begin{lemma}
+    Let $X \in \Shv(\adCAlg, \tau_\et)$ and consider its associated de Rham sheaf $X_\dR \in \Shv(\adCAlg, \tau_\et)$. If $X$ satisfies fpqc-descent then so does $X_\dR$.
+\end{lemma}
+
+\begin{proof}
+    One is reduced to show that the association $A \in \adCAlg \mapsto A_\red \in \adCAlg$ satisfies faithfully flat descent. This statement should reduce itself to prove that Jacobson ideal satisfies faithfully flat descent. This last assertion is a special case of fpqc-descent for quasi-coherent sheaves, proved in \cite[\href{https://stacks.math.columbia.edu/tag/023R}{Tag 023R}]{stacks-project}. 
+\end{proof}
+
+\subsection{Faithfully flat coverings by perfectoids}
 The following result shows that every object $A \in \adCAlg$ which is regular and Noetherian admits a faithfully flat map to a perfectoid ring:
 
 \begin{theorem}
@@ -460,6 +522,11 @@ In this \S we wish to prove the following:
         \]
     where $g$ is an \'etale map of derived $\bZp$-adic geometric stacks and $\pr$ denotes the canonical projection.
 \end{theorem}
+
+\begin{proof}
+    Since the result is both local on $X$ and $Y$, we can assume that $f \colon X \to Y$ is a smooth morphism between derived $\bZp$-adic schemes, \todo{Check this!}. In this case, the proof of \cite[Proposition 5.50]{porta2017representability} applies. \todo{Check this and write it better!}
+\end{proof}
+
 \subsection{Assumptions}
 
 First of all we will define the context in which we are going to work through.  Let us denote $\adCAlg$ the \infcat of adic $\bZp$-simplicial algebras, introduced in \cite{antonio2018p}. We consider the \infcat $\adSt(\adCAlg, \tau_{\et}, \rmP_{\sm})$ of \emph{derived $\bZp$-adic geometric stacks}.
