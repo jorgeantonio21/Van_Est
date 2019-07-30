@@ -506,89 +506,159 @@ The following result is of fundamental importance for our purposes:
 
 The following two results will establish the precise relation between $\Ainf(R) $ and $R$, via obstruction theory, for perfectoid $R$:
 
-
+The following proposition characterizes a (derived) universal property for $\Spf A_\dR(R)$, at least, when restricted to those simplicial $\bZp$-adic algebra whose Jacobson ideal of $\pi_0(A)$ is nilpotent.
 
 \begin{proposition} \label{Ainf_de_Rham}
-    Let $R \in \adCAlg$ be a $p$-torsion free integral perfectoid $\bZp$-algebra. Then, for every $p$-complete $A \in \adCAlg$, the natural morphism
+    Let $R \in \adCAlg$ be an integral perfectoid $\bZp$-algebra. Then, for every $p$-complete $A \in \adCAlg$, the natural morphism
         \[
                \theta \colon \Map_{\adCAlg}(\Ainf(R), A) \to   \Map_{\adCAlg}(R, \pi_0(A)_\mathrm{red}) ,
         \]
     is an equivalence of mapping spaces.
 \end{proposition}
 
-\begin{proof}
-    Let $f \colon R \to \pi_0(A)_\mathrm{red}$ denote a continuous $p$-adic morphism. Given any continuous morphism $f \colon R \to \pi_0(A)_\mathrm{red}$ we obtain, by base change along the morphism $\bZp \to \bF_p$, a well defined morphism
+\begin{proof} Let $A \in \adCAlg$ be $p$-complete and $R \in \adCAlg$ an integral perfectoid $\bZp$-algebra. For notational purposes, denote by $\varphi_A$ the Frobenius endomorphism of $A \otimes_{\bZp} \bF_p$.
+    We have a natural chain of equivalences of the form
+        \begin{align*}
+            \Map_{\adCAlg} \big( \Ainf(R), A \big) & \simeq \Map_{\CAlg_{\bF_p}} \big( R^\flat, A \otimes_{\bZp} \bF_p \big) \\
+                                                   & \simeq \Map_{\CAlg_{\bF_p}} \big( (R^\flat)^\perf, A \otimes_{\bZp} \bF_p \big) \\
+                                                   & \simeq \Map_{\CAlg_{\bF_p}} \big( R^\flat, (A \otimes_{\bZp} \bF_p)^\flat \big)
+        \end{align*}
+    where the first equivalence follos from the universal property of the (derived) $p$-typical Witt vectors construction combined with the fact that $\Ainf(R) \simeq W(R^\flat)$. The second equivalence follows from the fact that $R^\flat$ is a perfect $\bF_p$-simplicial algebra. As a consequence, the natural morphism
         \[
-            f \otimes_{\bZp} \bF_p \colon R/p \to \pi_0(A)_{\mathrm{red}} \otimes_{\bZp} \bF_p . 
+           R^\flat \to ( R^\flat )^\perf 
         \]
-    Pre-composition with the natural map $R^\flat \to R/p$ induces thus a morphism
+    is an isomorphism. The third equivalence, follows from the adjunction $(-)^\perf \dashv (-)^\flat$.
+
+    Notice that $(A \otimes_{\bZ_p} \bF_p)^\flat \in \CAlg_{\bF_p}$ is a perfect simplicial $\bF_p$-algebra. Therefore, thanks to \cite[Lemma 11.6]{bhatt2017projectivity}, it follows that $A^\flat \simeq \pi_0(A^\flat)$. Moreover,
+    we have a Milnor short exact sequence of the form
         \[
-            \overline{f}_1 \colon R^\flat \to \pi_0(A)_{\red} \otimes_{\bZp} \bF_p.  
+            0 \to \underset{\varphi_{A}}{\overset{1}{\lim}} \ \pi_1(A \otimes_{\bZp} \bF_p) \to \pi_0 \big((A \otimes_{\bZp} \bF_p)^\flat \big) \to \underset{\varphi_A}{\lim} \ \pi_0(A \otimes_{\bZp} \bF_p) \to 0.
         \]
-    Since $R^\flat $ is a perfect $\bF_p$-algebra, it follows that the morphism $\overline{f}_1$ factors (uniquely) through the perfectization of  $\pi_0(A)_{\red} \otimes_{\bZp} \bF_p$,
-    denoted 
+    We wish to prove that $\underset{\varphi_A}{\overset{1}{\lim}} \ \pi_1(A \otimes_{\bZp} \bF_p) \simeq 0 $ and thus conclude that
         \[
-            ( \pi_0(A)_\red \otimes_{\bZp} \bF_p)^{\mathrm{perf}} \coloneqq \underset{\varphi}{\lim} \ \big( \pi_0(A)_\red \otimes_{\bZp} \bF_p \big).
+            \pi_0 \big( (A \otimes_{\bZp} \bF_p)^\flat \big) \simeq \underset{\varphi_A}{\lim} \ \pi_0(A \otimes_{\bZp} \bF_p) . 
         \]
-    Thanks to \cite[Proposition 11.6]{bhatt2017projectivity} it follows that $( \pi_0(A)_\red \otimes_{\bZp} \bF_p)^{\mathrm{perf}}$ is a discrete $\bF_p$-algebra and we have a chain of uniquely defined (up to contractible indeterminacy) chain of equivalences
-        \begin{align}
-            ( \pi_0(A)_\red \otimes_{\bZp} \bF_p)^{\mathrm{perf}} & \simeq (\pi_0(A) \otimes_{\bZp} \bF_p)_\red^\mathrm{perf} \\
-                                                                  &   \simeq \pi_0(A \otimes_{\bZp} \bF_p)_{\red}^\mathrm{perf} \\
-                                                                  &    \simeq \pi_0(A \otimes_{\bZp} \bF_p)^{\mathrm{perf}}.
-        \end{align}
-    The natural morphism $\pi_0(A \otimes_{\bZp} \bF_p)^{\mathrm{perf}} \to \pi_0(A \otimes_{\bZp} \bF_p)$ induces thus a canonical morphism
+    We have a canonical bijection
         \[
-                \mathfrak{f}_0(1) \colon R^\flat \to \pi_0(A \otimes_{\bZp} \bF_p).
-        \]  
-    We shall prove, by induction on the (adic) Postnikov tower for $A \in \adCAlg$, that $\mathfrak{f}_0(1)$ lifts uniquely (up to a contractible space of indeterminacy) to a well defined morphism
-        \[
-            \mathfrak{f}(1) \colon R^\flat \to A \otimes_{\bZp} \bF_p.
+            \pi_1(A \otimes_{\bZp} \bF_p) \simeq \pi_0 \big( \Map_{\CAlg_{\bF_p}} (\Sym(\bF_p[1]), A) \big).
         \]
-    The case $n=0$ has already been dealt with. Suppose now that for $n \geq 0$ we have constructed a unique, up to contractible indeterminacy, morphism
+    For this reason, we have a canonical equivalence of pro-objects
+        \begin{equation} \label{eq:pro_system_for_first_homotopy_group_of_perfect_algebra}
+            \{ \pi_1(A \otimes_{\bZp} \bF_p) \}_{\varphi_A} \simeq \{ \pi_0 \big(\Map_{\CAlg_{\bF_p}} (\Sym(\bF_p[1]), A) \big) \}_{\varphi_{\Sym(\bF_p[1])}}  .
+        \end{equation}
+    But, thanks to the proof of \cite[Lemma 11.6]{bhatt2017projectivity}, the morphism $\varphi_{\Sym(\bF_p[1])}$ sends the generator in degree $1$ to the zero element in $A$. We thus conclude that the pro-system displayed in \eqref{eq:pro_system_for_first_homotopy_group_of_perfect_algebra} is trivial.
+    For this reason, we have
         \[
-            \mathfrak{f}_n(1) \colon R^\flat \to \tau_{\leq n} ( A \otimes_{\bZp} \bF_p)  
+            \underset{\varphi_A}{\overset{1}{\lim}} \ \pi_1(A \otimes_{\bZp} \bF_p)   \simeq 0.
         \]
-    in the \infcat $\adCAlg$. Indeed, consider the \emph{$n+1$-th level (Postnikov) derivation for $A \otimes_{\bZp} \bF_p$},
+    We thus conclude that we have an equivalence
         \[
-                d_n \colon \tau_{\leq n} (A \otimes_{\bZp} \bF_p) \to \tau_{\leq n}(A \otimes_{\bZp} \bF_p) \oplus \pi_{n+1}(A \otimes_{\bZp} \bF_p)[n+2].
+            A^\flat \simeq \pi_0(A)^\flat.  
         \]
-    The derivation $d_n$ fits into a pullback square
+    in the \infcat $\adCAlg$. Using this fact, we obtain a natural chain of equivalences of the form
+        \begin{align*}
+            \Map_{\CAlg_{\bF_p}}\big( R^\flat, (A \otimes_{\bZp} \bF_p)^\flat \big) & \simeq \Map_{\CAlg_{\bF_p}} \big( R^\flat, \pi_0(A \otimes_{\bZp} \bF_p)^\flat \big) \\
+                                                                                    & \simeq \Map_{\CAlg_{\bF_p}} \big( R^\flat, \pi_0(A \otimes_{\bZp} \bF_p)   \big) \\
+                                                                                    & \simeq \Hom_{\CAlg_{\bF_p}} \big( R^{\flat}, \pi_0(A \otimes_{\bZp} \bF_p) \big) \\
+                                                                                    & \simeq \Hom_{\CAlg_{\bF_p}} \big( R^\flat, \mathrm{Tor}^0_{\bZp}(\pi_0(A), \bF_p) \big) \\
+                                                                                    & \simeq \Hom_{\adCAlg} \big( \Ainf(R), \pi_0(A ) \big)  .                                                                     
+        \end{align*}
+    The fourth equivalence follows from the Tor-spectral sequence for simplicial rings and the last equivalence follows from the usual universal property of $p$-typical Witt vectors.
+    We thus conclude that we have an equivalence of mapping spaces,
         \[
-        \begin{tikzcd}
-                \tau_{\leq n+1} (A \otimes_{\bZp} \bF_p) \ar{r} \ar{d} & \tau_{\leq n}(A \otimes_{\bZp} \bF_p)   \ar{d} \\
-                \tau_{\leq n} (A \otimes_{\bZp} \bF_p) \ar{r} & \tau_{\leq n}(A \otimes_{\bZp} \bF_p) \oplus \pi_{n+1}(A \otimes_{\bZp} \bF_p)[n+2]
-        \end{tikzcd}
+            \Map_{\adCAlg}\big( \Ainf(R), A \big) \simeq \Hom_{\adCAlg} \big( \Ainf(R), \pi_0(A) \big).
         \]
-    in the \infcat $\adCAlg$. Moreover, liftings of the morphism 
+    By taking the component corresponding to continuous morphisms for the $(\varepsilon, p)$-topology on $\Ainf(R)$, we obtain an equivalence:
         \[
-            \mathfrak{f}_n(1) \colon R^\flat \to \tau_{\leq n}(A \otimes_{\bZp} \bF_p)
-        \] 
-    along the (adic) square-zero extension $\tau_{\leq n+1} (A \otimes_{\bZp} \bF_p ) \to \tau_{\leq n} (A \otimes_{\bZp} \bF_p)$ are classified by the mapping space
-        \[
-                \Map_{\Mod_{R^\flat}} \bigg(\adL_{R^\flat}, \pi_{n+1}(A \otimes_{\bZp} \bF_p) [n+2] \bigg) \simeq * \in \cS,
+            \colim_{n \geq 1} \bigg( \Map_{\adCAlg} \big( \Ainf(R)/(\varepsilon^n), A \big) \bigg) \simeq \colim_{n \geq 1} \bigg( \Hom_{\adCAlg} \big( \Ainf(R)/(\varepsilon^n), \pi_0(A) \big)  \bigg).
         \]
-    since, as $R^\flat$ is a perfect $\bF_p$-algebra, one necessarily has $\adL_{R^\flat} \simeq 0$.
-    Therefore, the morphism $\mathfrak{f}_1(n)$ lifts into a uniquely (up to contractible indeterminacy) well defined morphism
+    Our assumption on $A \in \adCAlg$, which has nilpotent Jacobson ideal, it follows that there exists a sufficiently large integer $k \geq 1$ such that
         \[
-                \mathfrak{f}_1(n+1) \colon R^\flat \to \tau_{\leq n+1}(A \otimes_{\bZp} \bF_p),  
+            \cJ_{\mathrm{Jac}}^k = 0.  
         \]
-    in the \infcat $\adCAlg$. This concludes the inductive step. Passing to inverse limits we obtain a well defined morphism
+    Thanks to \cite[Proposition 3.14]{szamuely2016p}, it follows then that
+        \begin{align*}
+            \colim_{n \geq 1} \bigg( \Hom_{\adCAlg} \big( \Ainf(R) / (\varepsilon^n), \pi_0(A) \big) \bigg) & \simeq \Hom_{\adCAlg} \big( \Ainf(R)/(\varepsilon^k), \pi_0(A)  \big)  \\
+                                                                                                   & \simeq  \Hom_{\adCAlg} \big( R, \pi_0(A)_\red \big).
+        \end{align*}
+    Putting all the pieces together, we obtain the desired canonical equivalence of mapping spaces 
         \[
-                \mathfrak{f}_1 \colon R^\flat \to A \otimes_{\bZp} \bF_p
+            \Map_{\adCAlg} \big( \Ainf(R), A \big) \simeq \Hom_{\adCAlg} \big( R, \pi_0(A)_\red \big) , 
         \]
-    in the \infcat $\adCAlg$.
-    Moreover, as $R^\flat$ is a perfect $\bF_p$-algebra, it follows that $\Ainf(R)/p^n \simeq W_n(R/p^\flat)$ in the \infcat $\adCAlg$. By the universal property of $p$-typical Witt vectors one obtains, for each integer $n \geq 1$, uniquely defined (up to contractible indeterminacy) morphisms
-        \[
-            \mathfrak{f}_n \colon \Ainf(R)/p^n \to A_n.
-        \]  
-    \personal{Notice that the universal property of Witt vectors is derived in nature. For example, given two objects $A, \ B \in \adCAlg$ we can find resolutions by polynomial algebras of these, seen as $\bZp$-simplicial algebras.
-    We obtain thus a morphism of simplicial polynomial algebras of the form $ \varphi \colon P_\bullet \to Q_\bullet$. If $Q_\bullet$ is defined over some $\bZ_p/p^n$ then applying Witt vectors component-wise to $P_\bullet$ provides a uniquely defined (up to contractible homotopy) $W_n(P_\bullet) \to Q_\bullet$ and thus $W_n(A) \to B$ in $\adCAlg$.}
-    Passing to the limit one obtains a unique lift (up to contractible indeterminacy) $\mathfrak{f} \colon \Ainf(R) \to A$, in $\adCAlg$.
-    Therefore, we conclude that the morphism
-        \[
-            \theta \colon \Map_{\adCAlg}(\Ainf(R), A) \to \Map_{\adCAlg} (R, \pi_0(A)_\red)  
-        \]
-    has contractible fiber over any $f \in \Map_{\adCAlg} (R, \pi_0(A)_\red)$. We conclude that the morphism $\theta$ is an equivalence of spaces, as desired.
+    as desired.
+%Old proof:
+%    Let $f \colon R \to \pi_0(A)_\mathrm{red}$ denote a continuous $p$-adic morphism. Given any continuous morphism $f \colon R \to \pi_0(A)_\mathrm{red}$ we obtain, by base change along the morphism $\bZp \to \bF_p$, a well defined morphism
+%        \[
+%            f \otimes_{\bZp} \bF_p \colon R/p \to \pi_0(A)_{\mathrm{red}} \otimes_{\bZp} \bF_p . 
+%        \]
+%    Pre-composition with the natural map $R^\flat \to R/p$ induces thus a morphism
+%        \[
+%            \overline{f}_1 \colon R^\flat \to \pi_0(A)_{\red} \otimes_{\bZp} \bF_p.  
+%        \]
+%    Since $R^\flat $ is a perfect $\bF_p$-algebra, it follows that the morphism $\overline{f}_1$ factors (uniquely) through the perfectization of  $\pi_0(A)_{\red} \otimes_{\bZp} \bF_p$,
+%    denoted 
+%        \[
+%            ( \pi_0(A)_\red \otimes_{\bZp} \bF_p)^{\mathrm{perf}} \coloneqq \underset{\varphi}{\lim} \ \big( \pi_0(A)_\red \otimes_{\bZp} \bF_p \big).
+%        \]
+%    Thanks to \cite[Proposition 11.6]{bhatt2017projectivity} it follows that $( \pi_0(A)_\red \otimes_{\bZp} \bF_p)^{\mathrm{perf}}$ is a discrete $\bF_p$-algebra and we have a chain of uniquely defined (up to contractible indeterminacy) chain of equivalences
+%        \begin{align}
+%            ( \pi_0(A)_\red \otimes_{\bZp} \bF_p)^{\mathrm{perf}} & \simeq (\pi_0(A) \otimes_{\bZp} \bF_p)_\red^\mathrm{perf} \\
+%                                                                  &   \simeq \pi_0(A \otimes_{\bZp} \bF_p)_{\red}^\mathrm{perf} \\
+%                                                                  &    \simeq \pi_0(A \otimes_{\bZp} \bF_p)^{\mathrm{perf}}.
+%        \end{align}
+%    The natural morphism $\pi_0(A \otimes_{\bZp} \bF_p)^{\mathrm{perf}} \to \pi_0(A \otimes_{\bZp} \bF_p)$ induces thus a canonical morphism
+%        \[
+%                \mathfrak{f}_0(1) \colon R^\flat \to \pi_0(A \otimes_{\bZp} \bF_p).
+%        \]  
+%    We shall prove, by induction on the (adic) Postnikov tower for $A \in \adCAlg$, that $\mathfrak{f}_0(1)$ lifts uniquely (up to a contractible space of indeterminacy) to a well defined morphism
+%        \[
+%            \mathfrak{f}(1) \colon R^\flat \to A \otimes_{\bZp} \bF_p.
+%        \]
+%    The case $n=0$ has already been dealt with. Suppose now that for $n \geq 0$ we have constructed a unique, up to contractible indeterminacy, morphism
+%        \[
+%            \mathfrak{f}_n(1) \colon R^\flat \to \tau_{\leq n} ( A \otimes_{\bZp} \bF_p)  
+%        \]
+%    in the \infcat $\adCAlg$. Indeed, consider the \emph{$n+1$-th level (Postnikov) derivation for $A \otimes_{\bZp} \bF_p$},
+%        \[
+%                d_n \colon \tau_{\leq n} (A \otimes_{\bZp} \bF_p) \to \tau_{\leq n}(A \otimes_{\bZp} \bF_p) \oplus \pi_{n+1}(A \otimes_{\bZp} \bF_p)[n+2].
+%        \]
+%    The derivation $d_n$ fits into a pullback square
+%        \[
+%        \begin{tikzcd}
+%                \tau_{\leq n+1} (A \otimes_{\bZp} \bF_p) \ar{r} \ar{d} & \tau_{\leq n}(A \otimes_{\bZp} \bF_p)   \ar{d} \\
+%                \tau_{\leq n} (A \otimes_{\bZp} \bF_p) \ar{r} & \tau_{\leq n}(A \otimes_{\bZp} \bF_p) \oplus \pi_{n+1}(A \otimes_{\bZp} \bF_p)[n+2]
+%        \end{tikzcd}
+%        \]
+%    in the \infcat $\adCAlg$. Moreover, liftings of the morphism 
+%        \[
+%            \mathfrak{f}_n(1) \colon R^\flat \to \tau_{\leq n}(A \otimes_{\bZp} \bF_p)
+%        \] 
+%    along the (adic) square-zero extension $\tau_{\leq n+1} (A \otimes_{\bZp} \bF_p ) \to \tau_{\leq n} (A \otimes_{\bZp} \bF_p)$ are classified by the mapping space
+%        \[
+%                \Map_{\Mod_{R^\flat}} \bigg(\adL_{R^\flat}, \pi_{n+1}(A \otimes_{\bZp} \bF_p) [n+2] \bigg) \simeq * \in \cS,
+%        \]
+%    since, as $R^\flat$ is a perfect $\bF_p$-algebra, one necessarily has $\adL_{R^\flat} \simeq 0$.
+%    Therefore, the morphism $\mathfrak{f}_1(n)$ lifts into a uniquely (up to contractible indeterminacy) well defined morphism
+%        \[
+%                \mathfrak{f}_1(n+1) \colon R^\flat \to \tau_{\leq n+1}(A \otimes_{\bZp} \bF_p),  
+%        \]
+%    in the \infcat $\adCAlg$. This concludes the inductive step. Passing to inverse limits we obtain a well defined morphism
+%        \[
+%                \mathfrak{f}_1 \colon R^\flat \to A \otimes_{\bZp} \bF_p
+%        \]
+%    in the \infcat $\adCAlg$.
+%    Moreover, as $R^\flat$ is a perfect $\bF_p$-algebra, it follows that $\Ainf(R)/p^n \simeq W_n(R/p^\flat)$ in the \infcat $\adCAlg$. By the universal property of $p$-typical Witt vectors one obtains, for each integer $n \geq 1$, uniquely defined (up to contractible indeterminacy) morphisms
+%        \[
+%            \mathfrak{f}_n \colon \Ainf(R)/p^n \to A_n.
+%        \]  
+%    \personal{Notice that the universal property of Witt vectors is derived in nature. For example, given two objects $A, \ B \in \adCAlg$ we can find resolutions by polynomial algebras of these, seen as $\bZp$-simplicial algebras.
+%    We obtain thus a morphism of simplicial polynomial algebras of the form $ \varphi \colon P_\bullet \to Q_\bullet$. If $Q_\bullet$ is defined over some $\bZ_p/p^n$ then applying Witt vectors component-wise to $P_\bullet$ provides a uniquely defined (up to contractible homotopy) $W_n(P_\bullet) \to Q_\bullet$ and thus $W_n(A) \to B$ in $\adCAlg$.}
+%    Passing to the limit one obtains a unique lift (up to contractible indeterminacy) $\mathfrak{f} \colon \Ainf(R) \to A$, in $\adCAlg$.
+%    Therefore, we conclude that the morphism
+%        \[
+%            \theta \colon \Map_{\adCAlg}(\Ainf(R), A) \to \Map_{\adCAlg} (R, \pi_0(A)_\red)  
+%        \]
+%    has contractible fiber over any $f \in \Map_{\adCAlg} (R, \pi_0(A)_\red)$. We conclude that the morphism $\theta$ is an equivalence of spaces, as desired.
 \end{proof}
 
 
